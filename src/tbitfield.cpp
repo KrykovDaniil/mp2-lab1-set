@@ -7,12 +7,11 @@
 
 #include "tbitfield.h"
 
-#define BITS_IN_ONE_MEM (sizeof(TELEM) * 8)
+#define BITS_IN_ONE_MEM sizeof(TELEM) * 8
 
 TBitField::TBitField(int len)
 {
-	if (len < 0)
-		throw 1;
+
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
@@ -42,8 +41,6 @@ int TBitField::GetLength(void) const // получить длину (к-во б�
 
 void TBitField::SetBit(const int n) // установить бит
 {
-	if ((n < 0) || (n > BitLen))
-		throw 2;
 }
 
 void TBitField::ClrBit(const int n) // очистить бит
@@ -96,6 +93,6 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
-  
+  cout << "{" << "}\n";
   return ostr;
 }
