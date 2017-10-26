@@ -205,6 +205,51 @@ TEST(TBitField, and_operator_applied_to_bitfields_of_equal_size)
 
   EXPECT_EQ(expBf, bf1 & bf2);
 }
+TEST(TBitField, or_operator_applied_to_bitfields_of_non_equal_size_min_on_left_for_big_bitfields)
+{
+	const int size1 = 40, size2 = 90;
+	TBitField bf1(size1), bf2(size2), expBf(size2);
+	// bf1
+	bf1.SetBit(1);
+	bf1.SetBit(29);
+	bf1.SetBit(38);
+	// bf2 
+	bf2.SetBit(1);
+	bf2.SetBit(18);
+	bf2.SetBit(29);
+	bf2.SetBit(89);
+	// expBf 
+	expBf.SetBit(1);
+	expBf.SetBit(18);
+	expBf.SetBit(29);
+	expBf.SetBit(38);
+	expBf.SetBit(89);
+
+	EXPECT_EQ(expBf, bf1 | bf2);
+}
+
+TEST(TBitField, or_operator_applied_to_bitfields_of_non_equal_size_min_on_right_for_big_bitfields)
+{
+	const int size1 = 40, size2 = 65;
+	TBitField bf1(size1), bf2(size2), expBf(size2);
+	// bf1
+	bf1.SetBit(1);
+	bf1.SetBit(29);
+	bf1.SetBit(38);
+	// bf2 
+	bf2.SetBit(1);
+	bf2.SetBit(18);
+	bf2.SetBit(29);
+	bf2.SetBit(64);
+	// expBf 
+	expBf.SetBit(1);
+	expBf.SetBit(18);
+	expBf.SetBit(29);
+	expBf.SetBit(38);
+	expBf.SetBit(64);
+
+	EXPECT_EQ(expBf, bf2 | bf1);
+}
 
 TEST(TBitField, and_operator_applied_to_bitfields_of_non_equal_size)
 {
